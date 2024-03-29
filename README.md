@@ -97,7 +97,8 @@ npx iconfont2Tsx-generate
 <Iconfont name="alipay" color={["red", "orange"]} size="300" />
 
 // 不同格式的颜色写法
-<Iconfont name="alipay" color={["#333", "rgb(50, 124, 39)"]} />
+**暂不支持 rgba 写法，因为需要encodeURIComponent转码**
+<Iconfont name="alipay" color={["#333", "red"]} />
 
 ```
 
