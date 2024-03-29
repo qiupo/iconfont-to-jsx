@@ -86,7 +86,7 @@ npx iconfont2Tsx-generate
 
 在 page 中使用图标。
 
-```jsx harmony
+```jsx
 // 原色彩
 <Iconfont name="alipay" />
 
@@ -94,19 +94,13 @@ npx iconfont2Tsx-generate
 <Iconfont name="alipay" color="red" />
 
 // 多色：红色+橘色
-<Iconfont name="alipay" color="{{['red', 'orange']}}" size="300" />
+<Iconfont name="alipay" color={["red", "orange"]} size="300" />
 
 // 不同格式的颜色写法
-<Iconfont name="alipay" color="{{['#333', 'rgb(50, 124, 39)']}}" />
+<Iconfont name="alipay" color={["#333", "rgb(50, 124, 39)"]} />
 
-// 与文字对齐
-<view style="display: flex; alignItems: center;">
-  <text>Hello</text>
-  <Iconfont name="alipay" />
-</view>
 ```
 
 # 更新图标
 
-当您在 iconfont.cn 中的图标有变更时，只需更改配置`symbol_url`，然后再次执行`Step 3`即可生成最新的图标组件。
-欢迎使用，并给我一些反馈和建议.
+当您在 iconfont.cn 中的图标有变更时，只需更改配置`symbol_url`，然后再次执行`Step 3`即可生成最新的图标组件。欢迎使用，并给我一些反馈和建议.

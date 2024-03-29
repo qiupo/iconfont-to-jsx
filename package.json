@@ -1,13 +1,17 @@
 {
-  "name": "iconfont2Tsx",
+  "name": "iconfont-to-jsx",
   "version": "1.0.0",
   "main": "index.js",
   "author": "taoqiupo <895665504@qq.com>",
   "license": "MIT",
   "module": "es",
+  "files": [
+    "./lib",
+    "./templates"
+  ],
   "bin": {
-    "iconfont2Tsx-init": "./src/init.js",
-    "iconfont2Tsx-generate": "./src/generatorIcon.js"
+    "iconfont2Tsx-init": "./lib/init.js",
+    "iconfont2Tsx-generate": "./lib/generatorIcon.js"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
