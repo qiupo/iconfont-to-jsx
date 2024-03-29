@@ -1,0 +1,20 @@
+import React, { useEffect, useState } from "react"
+import './#file_name#.less'
+
+export type nameType = #nametype#
+const Iconfont = ({ name, size, quot = '', color }: { name: nameType, size?: number, quot?: string, color?: string | string[] }) => {
+  const [svgSize, setSize] = useState(size);
+  useEffect(() => {
+    if (#rpx#){
+      setSize((size||#rpxsize#) * (#design_width# / 750))
+    }else{
+      setSize(size||#rpxsize#)
+    }
+  }, [size])
+  const isStr = typeof color === 'string';
+  const svgColor = isStr ? encodeURIComponent(color) : color?.map(item => encodeURIComponent(item))
+  return <>
+  #template#
+  </>
+}
+export default Iconfont
