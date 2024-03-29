@@ -34,7 +34,7 @@ export const getConfig = (): IconfontConfigType => {
 
   // 检查配置文件是否存在
   if (!fs.existsSync(targetFile)) {
-    console.warn(colors.red(`文件 "${configFilePath}" 不存在，请运行 npx iconfont-init 生成配置文件`));
+    console.warn(colors.red(`文件 "${configFilePath}" 不存在，请运行 npx iconfont2Tsx-init/yarn run iconfont2Tsx-init 生成配置文件`));
     process.exit(1);
   }
 

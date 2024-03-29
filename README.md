@@ -26,7 +26,7 @@ npm install iconfont-to-jsx --save-dev
 npx iconfont2Tsx-init
 
 # 可传入配置文件输出路径
-# npx iconfont-init --output iconfont.json
+# npx iconfont2Tsx-init --output iconfont.json
 ```
 
 此时项目根目录会生成一个`iconfont.json`的文件，内容如下：
