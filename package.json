@@ -1,6 +1,6 @@
 {
-  "name": "iconfont-to-jsx",
-  "version": "1.0.1",
+  "name": "iconfont-to-tsx",
+  "version": "1.0.2",
   "main": "index.js",
   "author": "taoqiupo <895665504@qq.com>",
   "license": "MIT",
@@ -12,6 +12,9 @@
   "bin": {
     "iconfont2Tsx-init": "./lib/init.js",
     "iconfont2Tsx-generate": "./lib/generatorIcon.js"
+  },
+  "scripts": {
+    "build": "rm -rf ./lib && tsc"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

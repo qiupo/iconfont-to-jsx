@@ -12,10 +12,10 @@
 
 ```bash
 # Yarn
-yarn add iconfont-to-jsx --dev
+yarn add iconfont-to-tsx --dev
 
 # Npm
-npm install iconfont-to-jsx --save-dev
+npm install iconfont-to-tsx --save-dev
 ```
 
 # Step 2
