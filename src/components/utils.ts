@@ -1,4 +1,5 @@
-import fs from 'fs-extra'
+import fs from 'fs-extra';
+import path from 'path';
 import axios from 'axios';
 import { parseString } from 'xml2js';
 import { XmlData } from '../type';
@@ -119,6 +120,27 @@ const fetchXml = async (symbol_url: string): Promise<XmlData> => {
   }
 };
 
+/**
+ * 读取指定的模板文件内容。
+ * @param fileName 模板文件的名称，不包括扩展名。
+ * @returns 返回模板文件的内容，为字符串格式。
+ */
+const getTemplate = (fileName: string) => {
+  return fs.readFileSync(path.join(__dirname, `../../templates/${fileName}.template`)).toString();
+};
+
+/**
+ * 将模板字符串中的指定内容替换为新内容。
+ * @param reg 需要替换的内容的正则表达式或字符串。
+ * @param template 模板字符串。
+ * @param content 要替换为的新内容。
+ * @returns 返回替换后的内容。
+ */
+const replaceContent = (reg: string | RegExp, template: string, content: any) => {
+  const exp = new RegExp(reg, 'g'); // 将传入的字符串或正则表达式转换为全局正则表达式
+  return template.replace(exp, content); // 执行替换操作并返回结果
+};
+
 export default {
   replaceHexToRgb,
   getState,
@@ -128,5 +150,7 @@ export default {
   mkFile,
   readFile,
   copy,
-  fetchXml
+  fetchXml,
+  getTemplate,
+  replaceContent
 }
