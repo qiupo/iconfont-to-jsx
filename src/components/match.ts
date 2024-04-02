@@ -28,11 +28,16 @@ class Match {
   generateComponent = (data: XmlData) => {
     const svgTemplates: string[] = [];
     const names: string[] = [];
+    const indexNames: { name: string, pathDir: string }[] = [];
     const saveDir = path.resolve(this.config.save_dir);
-    const fileName = this.config.file_name || 'index';
+    const iconAllName = this.config.icon_all_name || 'index';
     // 清理目录并创建目录
     utils.rmdir(saveDir);
     utils.mkdir(saveDir);
+    // 获取components模板
+    const componentTemplate = utils.getTemplate('component');
+    let ctx = utils.getTemplate('tsx')
+    const lessTemplate = utils.getTemplate('componentLess');
 
     // 遍历svg符号，生成模板和名称列表
     data.svg.symbol.forEach((item) => {
@@ -43,9 +48,30 @@ class Match {
           (_, value) => value.replace(/^[-_.=+#@!~*]+(.+?)$/, '$1')
         )
         : iconId;
-      names.push(iconIdAfterTrim);
+      if (this.config.is_signle) {
+
+        // 生成单个组件
+        const componentsOptions = {
+          'componentName': utils.toPascalCase(iconIdAfterTrim),
+          'ctx': componentTemplate,
+          'designWidth': this.config.design_width,
+          'fileName': 'index',
+          'template': `<div style={{backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`, width: \`\${svgSize}px\`, height: \`\${svgSize}px\`}} className="${utils.camelToKebab(utils.toPascalCase(iconIdAfterTrim))}" />`,
+          'rpx': this.config.use_rpx ? true : false,
+          'rpxSize': this.config.default_icon_size,
+        }
+        names.push(iconIdAfterTrim);
+        const repalceTemplate = utils.replaceAll(componentsOptions);
+        const repalceLessTemplate = utils.replaceContent('#iconName#', lessTemplate, utils.camelToKebab(componentsOptions.componentName));
+        indexNames.push({ name: componentsOptions.componentName, pathDir: `./components/${componentsOptions.componentName}` });
+        utils.mkdir(path.join(saveDir, 'components', componentsOptions.componentName));
+        utils.mkFile(path.join(saveDir, 'components', componentsOptions.componentName, 'index.tsx'), repalceTemplate);
+        utils.mkFile(path.join(saveDir, 'components', componentsOptions.componentName, 'index.less'), repalceLessTemplate);
+      }
+
+      // 全量图标
       svgTemplates.push(
-        `{/*${iconIdAfterTrim}*/}\n{name === '${iconIdAfterTrim}'?<div style={{backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`,` +
+        `{/*${iconIdAfterTrim}*/ }\n{ name === '${iconIdAfterTrim}' ? <div style={{ backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`,` +
         ' width: `${svgSize}px`, height: `${svgSize}px`}} className="icon" />:null}'
       );
       console.log(`${colors.green('√')} Generated icon "${colors.yellow(iconId)}"`);
@@ -53,18 +79,26 @@ class Match {
 
     // 准备名称类型字符串，用于模板替换
     const nameType = names.map(item => `'${item}'`).join('|');
-    let ctx = utils.getTemplate('tsx')
-    ctx = utils.replaceContent('#template#', ctx, svgTemplates.join('\n\n'));
-    ctx = utils.replaceContent('#nametype#', ctx, nameType);
-    ctx = utils.replaceContent('#rpx#', ctx, this.config.use_rpx ? true : false);
-    ctx = utils.replaceContent('#rpxsize#', ctx, this.config.default_icon_size);
-    ctx = utils.replaceContent('#design_width#', ctx, this.config.design_width);
-    ctx = utils.replaceContent('#file_name#', ctx, fileName);
+    ctx = utils.replaceAll({
+      'ctx': ctx,
+      'designWidth': this.config.design_width,
+      'fileName': 'index',
+      'nameType': nameType,
+      'componentName': iconAllName,
+      'template': svgTemplates.join('\n\n'),
+      'rpx': this.config.use_rpx ? true : false,
+      'rpxSize': this.config.default_icon_size,
+    });
 
     // 生成less和tsx文件
     const less = utils.getTemplate('less');
-    utils.mkFile(path.join(saveDir, fileName + '.less'), less);
-    utils.mkFile(path.join(saveDir, fileName + '.tsx'), ctx);
+    utils.mkdir(path.join(saveDir, iconAllName));
+    utils.mkFile(path.join(saveDir, iconAllName, 'index.less'), less);
+    utils.mkFile(path.join(saveDir, iconAllName, 'index.tsx'), ctx);
+    // 生成index文件
+    indexNames.push({ name: iconAllName, pathDir: `./${iconAllName}` })
+    const indexCtx = this.indexGenerator(indexNames);
+    utils.mkFile(path.join(saveDir, 'index.tsx'), indexCtx);
     console.log(`\n${colors.green('√')} All icons have been putted into dir: ${colors.green(this.config.save_dir)}\n`);
   };
 
@@ -133,6 +167,18 @@ class Match {
     }
 
     return template;
+  };
+
+  /**
+   * 生成索引文件内容的函数
+   * @param names 一个包含名称和路径目录的对象数组，每个对象都有name和pathDir属性
+   * @returns 返回一个字符串，该字符串包含根据提供的names数组生成的导出语句
+   */
+  indexGenerator = (names: { name: string, pathDir: string }[]): string => {
+    // 将names数组映射为包含导出语句的字符串数组，然后将这些字符串连接成一个大字符串
+    return names.map(item => {
+      return `export { default as ${item.name} } from '${item.pathDir}'`
+    }).join('\n');
   };
 }
 

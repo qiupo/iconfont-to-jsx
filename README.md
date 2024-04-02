@@ -47,7 +47,7 @@ npx iconfont2Tsx-init
 
 #### symbol_url
 
-请直接复制[iconfont](http://iconfont.cn)官网提供的项目链接。请务必看清是`.js`后缀而不是`.css`后缀
+请直接复制[iconfont](http://iconfont.cn)官网提供的项目链接。请务必看清是`.js`后缀而不是`.css`后缀，可使用 `//at.alicdn.com/t/c/font_4492100_gbyyt9o35yg.js` 试一下
 
 #### save_dir
 

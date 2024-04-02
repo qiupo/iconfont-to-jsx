@@ -12,9 +12,13 @@ export interface IconfontConfigType {
      */
     save_dir: string,
     /**
-     * 指定保存图标文件时的文件名。
+     * 指定全量图标的组件名
      */
-    file_name: string,
+    icon_all_name: string,
+    /**
+     * 控制是否生成单个图标组件
+     */
+    is_signle: boolean,
     /**
      * 控制图标大小是否使用rpx作为单位。
      */

@@ -1,7 +1,8 @@
 {
   "symbol_url": "请参考README.md，复制 http://iconfont.cn 官网提供的JS链接",
   "save_dir": "./src/Iconfont",
-  "file_name": "index",
+  "icon_all_name": "Iconfont",
+  "is_signle": true,
   "use_rpx": false,
   "trim_icon_prefix": "",
   "default_icon_size": 16,
