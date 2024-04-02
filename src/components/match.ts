@@ -56,7 +56,7 @@ class Match {
           'ctx': componentTemplate,
           'designWidth': this.config.design_width,
           'fileName': 'index',
-          'template': `<div style={{backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`, width: \`\${svgSize}px\`, height: \`\${svgSize}px\`}} className="${utils.camelToKebab(utils.toPascalCase(iconIdAfterTrim))}" />`,
+          'template': `<div style={{...style,...{backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`, width: \`\${svgSize}px\`, height: \`\${svgSize}px\`}}} className={\`${utils.camelToKebab(utils.toPascalCase(iconIdAfterTrim))} \${className}\`} />`,
           'rpx': this.config.use_rpx ? true : false,
           'rpxSize': this.config.default_icon_size,
         }
@@ -71,8 +71,8 @@ class Match {
 
       // 全量图标
       svgTemplates.push(
-        `{/*${iconIdAfterTrim}*/ }\n{ name === '${iconIdAfterTrim}' ? <div style={{ backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`,` +
-        ' width: `${svgSize}px`, height: `${svgSize}px`}} className="icon" />:null}'
+        `{/*${iconIdAfterTrim}*/ }\n{ name === '${iconIdAfterTrim}' ? <div style={{...style,...{ backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`,` +
+        ' width: `${svgSize}px`, height: `${svgSize}px`} }} className={`icon ${className}`} />:null}'
       );
       console.log(`${colors.green('√')} Generated icon "${colors.yellow(iconId)}"`);
     });
