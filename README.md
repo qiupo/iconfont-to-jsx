@@ -35,12 +35,14 @@ npx iconfont2Tsx-init
 {
   "symbol_url": "请参考README.md，复制 http://iconfont.cn 官网提供的JS链接",
   "save_dir": "./src/Iconfont",
-  "file_name": "index",
+  "icon_all_name": "Iconfont",
+  "is_signle": true,
   "use_rpx": false,
   "trim_icon_prefix": "",
   "default_icon_size": 16,
   "design_width": 750
 }
+
 ```
 
 ### 配置参数说明：
@@ -52,6 +54,12 @@ npx iconfont2Tsx-init
 #### save_dir
 
 根据 iconfont 图标生成的组件存放的位置。每次生成组件之前，该文件夹都会被清空。
+
+#### icon_all_name
+指定全量图标的组件名
+
+#### is_signle
+控制是否生成单个图标组件
 
 #### use_rpx
 
@@ -97,7 +105,7 @@ npx iconfont2Tsx-generate
 <Iconfont name="alipay" color={["red", "orange"]} size="300" />
 
 // 不同格式的颜色写法
-**暂不支持 rgba 写法，因为需要encodeURIComponent转码**
+// 暂不支持 rgba 写法，因为需要encodeURIComponent转码
 <Iconfont name="alipay" color={["#333", "red"]} />
 
 ```
