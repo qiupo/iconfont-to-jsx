@@ -48,6 +48,7 @@ class Match {
           (_, value) => value.replace(/^[-_.=+#@!~*]+(.+?)$/, '$1')
         )
         : iconId;
+      names.push(iconIdAfterTrim);
       if (this.config.is_signle) {
 
         // 生成单个组件
@@ -60,7 +61,6 @@ class Match {
           'rpx': this.config.use_rpx ? true : false,
           'rpxSize': this.config.default_icon_size,
         }
-        names.push(iconIdAfterTrim);
         const repalceTemplate = utils.replaceAll(componentsOptions);
         const repalceLessTemplate = utils.replaceContent('#iconName#', lessTemplate, utils.camelToKebab(componentsOptions.componentName));
         indexNames.push({ name: componentsOptions.componentName, pathDir: `./components/${componentsOptions.componentName}` });

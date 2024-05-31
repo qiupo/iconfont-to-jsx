@@ -1,8 +1,9 @@
 import React, { CSSProperties,useEffect, useState } from "react"
 import './#file_name#.less'
 
-export type nameType = #nametype#
-const #componentName# = ({ name, size, quot = '', color,className,style }: { name: nameType, size?: number, quot?: string, color?: string | string[],className?:string,style?:CSSProperties }) => {
+export type IconNameType = #nametype#
+export type IconfontProps = { name: nameType, size?: number, quot?: string, color?: string | string[],className?:string,style?:CSSProperties };
+const #componentName# = ({ name, size, quot = '', color,className,style }:IconfontProps) => {
   const [svgSize, setSize] = useState(size);
   useEffect(() => {
     if (#rpx#){
