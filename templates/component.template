@@ -5,9 +5,9 @@ const #componentName# = ({ size, quot = '', color,className,style }:  #component
   const [svgSize, setSize] = useState(size);
   useEffect(() => {
     if (#rpx#){
-      setSize((size||#rpxsize#) * (750 / #design_width#))
+      setSize((size||#rpxsize#) * (750 / #design_width#)+'rpx')
     }else{
-      setSize(size||#rpxsize#)
+      setSize((size||#rpxsize#)+'px')
     }
   }, [size])
   const isStr = typeof color === 'string';

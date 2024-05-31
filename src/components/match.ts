@@ -57,7 +57,7 @@ class Match {
           'ctx': componentTemplate,
           'designWidth': this.config.design_width,
           'fileName': 'index',
-          'template': `<div style={{...style,...{backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`, width: \`\${svgSize}px\`, height: \`\${svgSize}px\`}}} className={\`${utils.camelToKebab(utils.toPascalCase(iconIdAfterTrim))} \${className}\`} />`,
+          'template': `<div style={{...style,...{backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`, width: \`\${svgSize}\`, height: \`\${svgSize}\`}}} className={\`${utils.camelToKebab(utils.toPascalCase(iconIdAfterTrim))} \${className}\`} />`,
           'rpx': this.config.use_rpx ? true : false,
           'rpxSize': this.config.default_icon_size,
         }
@@ -72,7 +72,7 @@ class Match {
       // 全量图标
       svgTemplates.push(
         `{/*${iconIdAfterTrim}*/ }\n{ name === '${iconIdAfterTrim}' ? <div style={{...style,...{ backgroundImage: \`url(\${quot}data:image/svg+xml,${this.generateCase(item)}\${quot})\`,` +
-        ' width: `${svgSize}px`, height: `${svgSize}px`} }} className={`icon ${className}`} />:null}'
+        ' width: `${svgSize}`, height: `${svgSize}`} }} className={`icon ${className}`} />:null}'
       );
       console.log(`${colors.green('√')} Generated icon "${colors.yellow(iconId)}"`);
     });
@@ -108,7 +108,7 @@ class Match {
    * @returns 编码后的SVG模板字符串
    */
   generateCase(data: XmlData['svg']['symbol'][number]) {
-    let template = `%3Csvg%20viewBox%3D%27${encodeURIComponent(data.$.viewBox)}%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27\${svgSize}px%27%20height%3D%27\${svgSize}px%27%3E`;
+    let template = `%3Csvg%20viewBox%3D%27${encodeURIComponent(data.$.viewBox)}%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27\${svgSize}%27%20height%3D%27\${svgSize}%27%3E`;
 
     let keys = Object.keys(data) as Array<keyof XmlData['svg']['symbol'][number]>;
     for (const domName of keys) {
