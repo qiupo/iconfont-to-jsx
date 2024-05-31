@@ -14,7 +14,8 @@
     "iconfont2Tsx-generate": "./lib/generatorIcon.js"
   },
   "scripts": {
-    "build": "rm -rf ./lib && tsc"
+    "build": "rm -rf ./lib && tsc",
+    "publish": "npm run build && npm publish"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
