@@ -1,6 +1,6 @@
 {
   "name": "iconfont-to-tsx",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "index.js",
   "author": "taoqiupo <895665504@qq.com>",
   "license": "MIT",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "rm -rf ./lib && tsc",
-    "publish": "npm run build && npm publish"
+    "pub": "yarn build && yarn publish"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
